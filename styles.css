@@ -2274,96 +2274,21 @@
   }
 
   /* ============================================================
-     BRAND NAME STYLES (HTML text replacing SVG text)
+     BRAND LOGO IMAGES
      ============================================================ */
-  .brand-name {
-    font-family: var(--font-body);
-    font-weight: 600;
-    color: var(--forest);
-    font-size: 1.25rem;
-    opacity: 0.85;
-    letter-spacing: 0.01em;
-    transition: opacity 0.25s;
-    white-space: nowrap;
-    line-height: 1.2;
-    text-align: center;
+  .brand-cell img {
+    max-width: 100%;
+    max-height: 44px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1) brightness(0.2);
+    opacity: 0.7;
+    transition: filter 0.35s var(--ease), opacity 0.35s var(--ease);
   }
-  .brand-cell:hover .brand-name { opacity: 1; }
-
-  .brand-cocacola {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 700;
-    font-size: 1.55rem;
-    letter-spacing: -0.02em;
-  }
-  .brand-mtn {
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    font-size: 1.4rem;
-  }
-  .brand-spotify {
-    font-weight: 500;
-    font-size: 1.2rem;
-    letter-spacing: 0.03em;
-  }
-  .brand-spotify .brand-sub {
-    display: block;
-    font-size: 0.55rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.55;
-    margin-top: 2px;
-    font-weight: 400;
-  }
-  .brand-multichoice {
-    font-weight: 500;
-    font-size: 1.2rem;
-    letter-spacing: 0.02em;
-  }
-  .brand-multichoice strong {
-    font-weight: 700;
-  }
-  .brand-lemfi {
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-size: 1.15rem;
-  }
-  .brand-taptapsend {
-    font-weight: 600;
-    font-size: 1.15rem;
-    letter-spacing: -0.01em;
-  }
-  .brand-taptapsend span {
-    font-weight: 300;
-  }
-  .brand-raenest {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
-  }
-  .brand-rky {
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-size: 1.1rem;
-  }
-  .brand-rky .brand-sub {
-    display: block;
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    opacity: 0.55;
-    margin-top: 2px;
-    font-weight: 400;
-  }
-  .brand-roobet {
-    font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
-    text-transform: lowercase;
+  .brand-cell:hover img {
+    filter: grayscale(0) brightness(1);
+    opacity: 1;
   }
 
   /* Respect user motion preferences */
