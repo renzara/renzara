@@ -2174,8 +2174,9 @@
 
     #brands { padding: 48px 24px 56px; }
     .brands-grid { grid-template-columns: repeat(3, 1fr); }
-    .brand-cell { padding: 18px 12px; min-height: 80px; }
+    .brand-cell { padding: 18px 12px; min-height: 80px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
     .brand-cell img, .brand-cell svg { max-height: 26px; max-width: 80px; }
+    .brand-cell .brand-text { font-size: 1rem; text-align: center; }
   }
 
   @media (min-width: 821px) {
