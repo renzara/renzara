@@ -1097,33 +1097,15 @@
     inset: 0;
     background: linear-gradient(
       to top,
-      rgba(15, 31, 24, 0.95) 0%,
-      rgba(15, 31, 24, 0.7) 35%,
-      rgba(15, 31, 24, 0.2) 60%,
-      rgba(15, 31, 24, 0.4) 100%
+      rgba(15, 31, 24, 0.92) 0%,
+      rgba(15, 31, 24, 0.45) 30%,
+      rgba(15, 31, 24, 0.05) 55%,
+      rgba(15, 31, 24, 0.15) 100%
     );
     z-index: 1;
     pointer-events: none;
   }
 
-  /* Giant ghosted first name — the magazine cover moment */
-  .cover-nameplate {
-    position: absolute;
-    left: -10px;
-    bottom: 120px;
-    font-family: var(--font-display);
-    font-size: clamp(5rem, 9vw, 7.5rem);
-    font-weight: 800;
-    color: rgba(212, 240, 80, 0.07);
-    line-height: 0.85;
-    letter-spacing: -0.05em;
-    pointer-events: none;
-    z-index: 2;
-    transition: color 0.4s var(--ease), transform 0.4s var(--ease);
-  }
-  .talent-card:hover .cover-nameplate {
-    color: rgba(212, 240, 80, 0.12);
-  }
 
   /* Bottom block */
   .cover-bottom {
