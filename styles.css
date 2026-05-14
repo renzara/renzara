@@ -2059,6 +2059,15 @@
   /* ============================================================
      RESPONSIVE
      ============================================================ */
+  /* ---- Large desktop (1440+) ---- */
+  @media (min-width: 1440px) {
+    .hero-inner { max-width: 1400px; margin: 0 auto; }
+    #about, #services, #contact { padding-left: 100px; padding-right: 100px; }
+    #brands { padding-left: 100px; padding-right: 100px; }
+    .site-footer { padding-left: 100px; padding-right: 100px; }
+  }
+
+  /* ---- Tablet landscape / small laptop (1024px) ---- */
   @media (max-width: 1024px) {
     .overlay-content { grid-template-columns: 1fr; padding: calc(var(--nav-h) + 20px) 32px 32px; }
     .overlay-right { display: none; }
@@ -2088,7 +2097,6 @@
     .contact-details { margin-top: 0; flex-direction: row; flex-wrap: wrap; gap: 32px; }
     .contact-details > div { min-width: 160px; }
 
-    /* Swap pills for dropdown on tablet and below */
     .letter-pills { display: none; }
     .letter-select { display: block; }
 
@@ -2097,6 +2105,7 @@
     .footer-grid .footer-colophon-col { grid-column: span 2; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; margin-top: 4px; }
   }
 
+  /* ---- Tablet portrait / mobile (820px) ---- */
   @media (max-width: 820px) {
     .nav { padding: 0 24px; }
     .nav-links, .nav-cta { display: none; }
@@ -2105,12 +2114,18 @@
     .overlay-links a::before { display: none; }
 
     #hero {
-      height: 100vh;
+      position: relative;
       height: 100dvh;
+      z-index: auto;
     }
-    .hero-inner { padding: calc(var(--nav-h) + 8px) 24px 48px; min-height: 100dvh; }
-    .hero-eyebrow { margin-bottom: 20px; }
-    .hero-headline-row { gap: 10px; }
+    .hero-inner {
+      padding: calc(var(--nav-h) + 8px) 24px 48px;
+      min-height: 100dvh;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-eyebrow { margin-bottom: 20px; justify-content: center; }
+    .hero-headline-row { gap: 10px; justify-content: center; }
     .hero-h1 { font-size: clamp(2.2rem, 9vw, 3rem); white-space: normal; }
     .hero-img-inline { display: none; }
     .hero-imgs-mobile {
@@ -2130,12 +2145,15 @@
       height: 100%;
       object-fit: cover;
     }
-    .hero-inner { align-items: center; text-align: center; }
-    .hero-eyebrow { justify-content: center; }
-    .hero-headline-row { justify-content: center; }
     .hero-bottom { flex-direction: column; align-items: center; gap: 24px; }
     .hero-sub { text-align: center; }
     .hero-est { margin-left: 0; }
+
+    #brands { padding: 48px 24px 56px; }
+    .brands-grid { grid-template-columns: repeat(2, 1fr); }
+    .brand-cell { padding: 24px 16px; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+    .brand-cell img, .brand-cell svg { max-height: 28px; max-width: 90px; }
+    .brand-cell .brand-text { font-size: 1rem; text-align: center; }
 
     #about {
       min-height: auto;
@@ -2182,20 +2200,49 @@
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
     .footer-bottom-links { width: 100%; justify-content: space-between; }
 
-    #brands { padding: 48px 24px 56px; }
-    .brands-grid { grid-template-columns: repeat(2, 1fr); }
-    .brand-cell { padding: 24px 16px; min-height: 80px; display: flex; align-items: center; justify-content: center; }
-    .brand-cell img, .brand-cell svg { max-height: 28px; max-width: 90px; }
-    .brand-cell .brand-text { font-size: 1rem; text-align: center; }
+    #brands, #about, #services, #talent, #contact, .site-footer {
+      z-index: auto;
+      box-shadow: none;
+    }
   }
 
   @media (min-width: 821px) {
     .nav-overlay { display: none; }
   }
 
+  /* ---- Small mobile (480px) ---- */
   @media (max-width: 480px) {
+    .hero-h1 { font-size: clamp(1.8rem, 8.5vw, 2.6rem); }
+    .hero-sub { font-size: 0.95rem; }
     .hero-ctas { flex-direction: row; justify-content: center; }
     .hero-ctas a { font-size: 0.65rem; padding: 12px 18px; }
+    .hero-imgs-mobile { gap: 8px; margin-bottom: 24px; }
+    .hero-img-mob { height: 130px; }
+
+    .about-headline { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+    .about-stats { gap: 0; }
+    .about-stat { padding: 20px 14px; }
+    .stat-number { font-size: 1.6rem; }
+
+    .talent-card { min-height: 380px; }
+    .cover-nameplate { font-size: 4rem; bottom: 90px; }
+
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-grid .footer-colophon-col { grid-column: span 1; }
+  }
+
+  /* ---- Very small mobile (360px) ---- */
+  @media (max-width: 360px) {
+    .nav { padding: 0 16px; }
+    .hero-inner { padding-left: 16px; padding-right: 16px; }
+    .hero-h1 { font-size: 1.7rem; }
+    .hero-ctas a { font-size: 0.6rem; padding: 10px 14px; }
+
+    #brands { padding: 40px 16px 48px; }
+    #about, #services, #talent, #contact { padding-left: 16px; padding-right: 16px; }
+    .site-footer { padding-left: 16px; padding-right: 16px; }
+
+    .letter-card { padding: 18px; }
   }
 
   body.no-scroll { overflow: hidden; }
