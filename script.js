@@ -7,6 +7,17 @@
     }
   });
 
+  // ========== HERO SLIDESHOW ==========
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  if (heroSlides.length > 1) {
+    let current = 0;
+    setInterval(() => {
+      heroSlides[current].classList.remove('active');
+      current = (current + 1) % heroSlides.length;
+      heroSlides[current].classList.add('active');
+    }, 4000);
+  }
+
   const nav = document.getElementById('nav');
   const hamburger = document.getElementById('hamburger');
   const overlayLinks = document.querySelectorAll('.overlay-links a');
