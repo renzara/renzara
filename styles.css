@@ -177,6 +177,13 @@
     transition: transform 0.5s var(--ease), opacity 0.3s var(--ease);
   }
 
+  .nav.open .nav-logo {
+    color: var(--forest);
+    -webkit-text-stroke: 1px var(--forest);
+  }
+  .nav.open .nav-logo-dot {
+    color: var(--forest);
+  }
   .nav.open .hamburger span {
     background: var(--forest);
   }
@@ -2097,12 +2104,11 @@
     .overlay-links { padding-left: 0; }
     .overlay-links a::before { display: none; }
 
-    /* Release the 100vh lock on mobile so content flows naturally */
     #hero {
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100vh;
+      height: 100dvh;
     }
-    .hero-inner { padding: calc(var(--nav-h) + 8px) 24px 48px; }
+    .hero-inner { padding: calc(var(--nav-h) + 8px) 24px 48px; min-height: 100dvh; }
     .hero-eyebrow { margin-bottom: 20px; }
     .hero-headline-row { gap: 10px; }
     .hero-h1 { font-size: clamp(2.2rem, 9vw, 3rem); white-space: normal; }
