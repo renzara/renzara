@@ -7,7 +7,7 @@
     const wordmark = loader.querySelector('.loader-wordmark');
     if (!wordmark) return;
 
-    const minTime = 12000;
+    const minTime = 5000;
     let ready = false;
     const remaining = Math.max(0, minTime - performance.now());
     setTimeout(() => { ready = true; }, remaining);
