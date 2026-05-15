@@ -1734,20 +1734,24 @@
   .brands-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    border-top: 1px solid rgba(26, 51, 40, 0.25);
-    border-left: 1px solid rgba(26, 51, 40, 0.25);
+    border-top: 1px solid rgba(212, 240, 80, 0.25);
+    border-left: 1px solid rgba(212, 240, 80, 0.25);
   }
   .brand-cell {
-    border-right: 1px solid rgba(26, 51, 40, 0.25);
-    border-bottom: 1px solid rgba(26, 51, 40, 0.25);
+    border-right: 1px solid rgba(212, 240, 80, 0.25);
+    border-bottom: 1px solid rgba(212, 240, 80, 0.25);
     padding: 32px 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 110px;
-    transition: background 0.25s ease;
+    transition: transform 0.3s ease, background 0.25s ease;
   }
-  .brand-cell:hover { background: rgba(26, 51, 40, 0.03); }
+  .brand-cell:hover {
+    background: rgba(212, 240, 80, 0.06);
+    transform: scale(1.06);
+    z-index: 2;
+  }
   .brand-cell .brand-text {
     font-family: var(--font-display);
     font-weight: 700;
@@ -2301,7 +2305,7 @@
     .hero-sub { text-align: center; }
     .hero-est { margin-left: 0; }
 
-    #brands { padding: 48px 24px 56px; }
+    #brands { padding: 32px 24px 56px; }
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
     .brand-cell { padding: 24px 16px; min-height: 80px; display: flex; align-items: center; justify-content: center; }
     .brand-cell img, .brand-cell svg { max-height: 28px; max-width: 90px; }
@@ -2338,7 +2342,8 @@
 
     #contact { padding: 64px 24px; }
     .contact-grid { grid-template-columns: 1fr; gap: 28px; }
-    .contact-details { margin-top: 8px; gap: 18px; flex-direction: column; }
+    .contact-details { margin-top: 8px; gap: 18px; flex-direction: row; }
+    .contact-details > div { flex: 1; min-width: 0; }
     .letter-card { padding: 24px; }
     .letter-row { flex-direction: column; align-items: stretch; gap: 4px; margin-bottom: 16px; }
     .letter-row .prefix { font-size: 0.82rem; opacity: 0.65; }
@@ -2402,7 +2407,7 @@
     .hero-h1 { font-size: 1.7rem; }
     .hero-ctas a { font-size: 0.6rem; padding: 10px 14px; }
 
-    #brands { padding: 40px 16px 48px; }
+    #brands { padding: 28px 16px 48px; }
     #about, #services, #talent, #contact { padding-left: 16px; padding-right: 16px; }
     .site-footer { padding-left: 16px; padding-right: 16px; }
 
@@ -2553,7 +2558,7 @@
   }
   @keyframes sweepBreathe {
     0%   { background-position: 100% 0; transform: scale(0.92); -webkit-text-stroke: 3px rgba(26, 51, 40, 0.4); }
-    100% { background-position: 0% 0; transform: scale(1.1); -webkit-text-stroke: 2px rgba(255, 250, 220, 0.75); }
+    100% { background-position: 0% 0; transform: scale(1.1); -webkit-text-stroke: 1px rgba(255, 250, 220, 0.75); }
   }
 
   .page-loader.rushing {
