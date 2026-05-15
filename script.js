@@ -1,10 +1,32 @@
   // ========== PAGE LOADER ==========
+  // Phase 1 only — outlines fade in
   window.addEventListener('load', () => {
-    const loader = document.querySelector('.page-loader');
-    if (loader) {
-      setTimeout(() => loader.classList.add('loaded'), 400);
-      setTimeout(() => loader.remove(), 1000);
-    }
+    const loader = document.getElementById('pageLoader');
+    if (!loader) return;
+
+    const wordmark = loader.querySelector('.loader-wordmark');
+    if (!wordmark) return;
+
+    const minTime = 12000;
+    let ready = false;
+    const remaining = Math.max(0, minTime - performance.now());
+    setTimeout(() => { ready = true; }, remaining);
+
+    wordmark.addEventListener('animationiteration', () => {
+      if (!ready) return;
+      const iterFromStart = Math.round((performance.now() - 800) / 3000);
+      if (iterFromStart % 2 === 0) {
+        loader.classList.add('rushing');
+        document.getElementById('hero')?.classList.add('hero-active');
+        setTimeout(() => {
+          loader.classList.add('done');
+          document.querySelectorAll('.nav-logo, .nav-links, .nav-cta, .hamburger').forEach(el => {
+            el.style.animation = 'heroUp 0.8s var(--ease) forwards';
+          });
+          setTimeout(() => loader.remove(), 500);
+        }, 2500);
+      }
+    });
   });
 
 
@@ -53,6 +75,71 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // ========== HERO SCROLL ZOOM-OUT (desktop only) ==========
+  (function () {
+    const hero = document.getElementById('hero');
+    const heroInner = hero ? hero.querySelector('.hero-inner') : null;
+    if (!hero || !heroInner) return;
+
+    const desktopQuery = window.matchMedia('(min-width: 821px)');
+    let ticking = false;
+
+    function applyZoom() {
+      ticking = false;
+      if (!desktopQuery.matches) {
+        heroInner.style.transform = '';
+        heroInner.style.opacity = '';
+        return;
+      }
+      const heroHeight = hero.offsetHeight;
+      const scrollY = window.scrollY;
+      if (scrollY <= 0) {
+        heroInner.style.transform = '';
+        heroInner.style.opacity = '';
+        return;
+      }
+      const progress = Math.min(scrollY / heroHeight, 1);
+      const scale = 1 - progress * 0.15;
+      const opacity = 1 - progress * 0.4;
+      heroInner.style.transform = 'scale(' + scale + ')';
+      heroInner.style.opacity = opacity;
+    }
+
+    function onHeroScroll() {
+      if (!ticking) {
+        requestAnimationFrame(applyZoom);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onHeroScroll, { passive: true });
+    desktopQuery.addEventListener('change', applyZoom);
+  })();
+
+  // ========== HERO RE-REVEAL ON SCROLL BACK ==========
+  (function () {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    let firstRevealDone = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!firstRevealDone) {
+          if (hero.classList.contains('hero-active')) firstRevealDone = true;
+          return;
+        }
+        if (entry.isIntersecting) {
+          hero.classList.add('hero-active', 'hero-revisit');
+        } else {
+          hero.classList.remove('hero-active', 'hero-revisit');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(hero);
+  })();
+
 
   function updateLiveTime() {
     const el = document.getElementById('liveTime');
@@ -167,10 +254,20 @@
 
   // ========== BACK TO TOP ==========
   const backToTopBtn = document.getElementById('backToTop');
+  const floatingTop = document.getElementById('floatingTop');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  }
+  if (floatingTop) {
+    floatingTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight) floatingTop.classList.add('visible');
+      else floatingTop.classList.remove('visible');
+    }, { passive: true });
   }
 
   // ========== MODAL SYSTEM (services + talent) ==========
@@ -259,3 +356,126 @@
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }
+
+  // ========== ABOUT SECTION WIPE ==========
+  (function () {
+    const about = document.getElementById('about');
+    if (!about) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) about.classList.add('wipe-in');
+        else about.classList.remove('wipe-in');
+      });
+    }, { threshold: 0.15 });
+    observer.observe(about);
+  })();
+
+  // ========== FOOTER GARAGE DOOR ==========
+  (function () {
+    const footer = document.getElementById('siteFooter');
+    if (!footer) return;
+    const panels = footer.querySelectorAll('.garage-panel');
+    if (!panels.length) return;
+    let ticking = false;
+
+    function updatePanels() {
+      ticking = false;
+      const rect = footer.getBoundingClientRect();
+      const viewH = window.innerHeight;
+
+      const entered = viewH - rect.top;
+      const step = viewH * 0.12;
+
+      panels.forEach((panel, i) => {
+        const threshold = i * step;
+        if (entered > threshold) panel.classList.add('open');
+        else panel.classList.remove('open');
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updatePanels);
+        ticking = true;
+      }
+    }, { passive: true });
+    updatePanels();
+  })();
+
+  // ========== TALENT CARDS SPREAD/GATHER ==========
+  (function () {
+    const talent = document.getElementById('talent');
+    if (!talent) return;
+    const cards = talent.querySelectorAll('.talent-card');
+    if (cards.length < 2) return;
+    let ticking = false;
+    const maxOffset = 120;
+
+    function applySpread() {
+      ticking = false;
+      const rect = talent.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      const center = rect.top + rect.height / 2;
+      const viewCenter = viewH / 2;
+      const dist = Math.abs(center - viewCenter);
+      const maxDist = viewH / 2 + rect.height / 2;
+      const progress = Math.min(dist / maxDist, 1);
+      const offset = progress * maxOffset;
+
+      cards[0].style.transform = 'translateX(' + (-offset) + 'px)';
+      cards[1].style.transform = 'translateX(' + offset + 'px)';
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(applySpread);
+        ticking = true;
+      }
+    }, { passive: true });
+    applySpread();
+  })();
+
+  // ========== DOT MATRIX WAVE ==========
+  document.querySelectorAll('.dot-matrix').forEach(canvas => {
+    const ctx = canvas.getContext('2d');
+    const dir = canvas.dataset.direction === 'left' ? -1 : 1;
+    const gap = 18;
+    const baseRadius = 1.5;
+    let cols, rows, w, h;
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      w = canvas.width = rect.width * devicePixelRatio;
+      h = canvas.height = rect.height * devicePixelRatio;
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+      cols = Math.floor(rect.width / gap);
+      rows = Math.floor(rect.height / gap);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function draw(t) {
+      ctx.clearRect(0, 0, w, h);
+      const realW = w / devicePixelRatio;
+      const realH = h / devicePixelRatio;
+      const padX = (realW - (cols - 1) * gap) / 2;
+      const padY = (realH - (rows - 1) * gap) / 2;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = padX + c * gap;
+          const y = padY + r * gap;
+          const wave = Math.sin((c / cols) * Math.PI * 2 + (t * 0.0008 * dir)) *
+                       Math.cos((r / rows) * Math.PI + (t * 0.0006));
+          const brightness = 0.15 + Math.abs(wave) * 0.55;
+          const radius = baseRadius + Math.abs(wave) * 1.2;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(212, 240, 80, ' + brightness + ')';
+          ctx.fill();
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  });

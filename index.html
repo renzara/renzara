@@ -83,9 +83,8 @@
 <body>
 
   <!-- PAGE LOADER -->
-  <div class="page-loader">
-    <span class="loader-wordmark">Renzara</span>
-    <div class="loader-bar"></div>
+  <div class="page-loader" id="pageLoader">
+    <span class="loader-wordmark">RENZARA</span>
   </div>
 
   <!-- ============================================================
@@ -102,9 +101,10 @@
     </ul>
 
     <a href="#contact" class="nav-cta">Get in touch
-      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
-      </svg>
+      <span class="arrow-circle">
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        <svg class="arrow arrow--next" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </span>
     </a>
 
     <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -291,9 +291,10 @@
         <p class="hero-sub hero-reveal hero-reveal--5">A London-based marketing and talent management agency, connecting brands with the UK and Africa's most engaging voices.</p>
         <div class="hero-ctas hero-reveal hero-reveal--6">
           <a href="#services" class="btn-primary">See our work
-            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
-            </svg>
+            <span class="arrow-circle">
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              <svg class="arrow arrow--next" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </span>
           </a>
           <a href="#talent" class="btn-outline">Meet the talent</a>
         </div>
@@ -349,26 +350,25 @@
        ABOUT
        ============================================================ -->
   <section id="about">
-    <div class="about-tag-row reveal">
-      <span class="about-tag">About · The studio</span>
-    </div>
-
-    <h2 class="about-headline reveal reveal-delay-1">We don't just run campaigns.<br>We build <em>movements</em>.</h2>
-
     <div class="about-grid">
-      <div class="about-text reveal reveal-delay-2">
-        <p>Renzara is a London studio pairing the UK and Africa's most engaging voices with the brands that should be working with them. We manage creators as careers, not campaigns — and we bridge London and Lagos like no one else.</p>
+      <div class="about-left">
+        <div class="about-tag-row">
+          <span class="about-tag">About · The studio</span>
+        </div>
+        <h2 class="about-headline">We don't just run campaigns.<br>We build <em>movements</em>.</h2>
+        <p class="about-body">Renzara is a London studio pairing the UK and Africa's most engaging voices with the brands that should be working with them. We manage creators as careers, not campaigns — and we bridge London and Lagos like no one else.</p>
         <div class="about-ctas">
           <a href="#services" class="btn-primary">What we do
-            <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
-            </svg>
+            <span class="arrow-circle">
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              <svg class="arrow arrow--next" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </span>
           </a>
           <a href="#talent" class="btn-outline">Meet the team</a>
         </div>
       </div>
 
-      <div class="about-stats reveal reveal-delay-3">
+      <div class="about-stats">
         <div class="about-stat">
           <span class="stat-number">9+</span>
           <span class="stat-label">Brand partners</span>
@@ -462,6 +462,14 @@
        TALENT (magazine cover cards)
        ============================================================ -->
   <section id="talent">
+    <div class="talent-strips">
+      <div class="talent-strip">
+        <canvas class="dot-matrix" data-direction="right"></canvas>
+      </div>
+      <div class="talent-strip">
+        <canvas class="dot-matrix" data-direction="left"></canvas>
+      </div>
+    </div>
     <div class="talent-header reveal">
       <span class="talent-tag">Talent — Index 03</span>
       <span class="talent-meta">2 on roster · Africa & UK</span>
@@ -792,15 +800,21 @@
   <!-- ============================================================
        FOOTER (back cover)
        ============================================================ -->
-  <footer class="site-footer">
+  <footer class="site-footer" id="siteFooter">
+    <div class="garage-door">
 
+    <div class="garage-panel">
     <div class="footer-top">
       <span class="footer-imprint-tag">Imprint · Volume 01</span>
       <span class="footer-signoff">"Built in London,<br>made for everywhere."</span>
     </div>
+    </div>
 
+    <div class="garage-panel">
     <div class="footer-wordmark">Renzara</div>
+    </div>
 
+    <div class="garage-panel">
     <div class="footer-grid">
 
       <div>
@@ -845,23 +859,25 @@
       </div>
 
     </div>
+    </div>
 
+    <div class="garage-panel">
     <div class="footer-bottom">
       <span class="footer-copyright">© 2025 Renzara Creative Ltd. All rights reserved.</span>
       <div class="footer-bottom-links">
         <a href="#" class="footer-privacy">Privacy</a>
-        <button class="footer-totop" id="backToTop" aria-label="Back to top">
-          Back to top
-          <span class="footer-totop-circle">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
-            </svg>
-          </span>
-        </button>
       </div>
     </div>
+    </div>
 
+    </div>
   </footer>
+
+  <button class="floating-top" id="floatingTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 19V5"/><path d="M5 12l7-7 7 7"/>
+    </svg>
+  </button>
 
 <script src="script.js"></script>
 
